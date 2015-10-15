@@ -21,18 +21,17 @@ position = document.getElementById('content');
 for(var i = 0; i < array.length; i++){
 	array[i] = calculateSTI(array[i]); //BUG #1 need to add [i] to calculateSTI(array)
  	newEl = document.createElement('li');
-  console.log("Here is the newEl list: ", newEl);
+  //console.log("Here is the newEl list: ", newEl);
 	newText = document.createTextNode(array[i]);
 	newEl.appendChild(newText);
 	position.appendChild(newEl);
 }
 
 function calculateSTI(array){
-  var newArray = [];
+  var newObject = {};
 
 //Taking each iteration of the array and assigning the associated object location
-  newArray[0] = array.name;
-
+  var employeeName = array.name;
   var employeeNumber = array.employeeNumber;
   var baseSalary = array.baseSalary;
   var reviewScore = array.reviewScore;
@@ -42,11 +41,11 @@ function calculateSTI(array){
     bonus = 0.13;
   }
 
-  newArray[1] = bonus;
-  newArray[2] = Math.round(baseSalary * (1.0 + bonus)); //BUG #3 Need to parenthesize 1.0 + bonus to override order of operations and parseInt to round to whole number
-  newArray[3] = baseSalary * bonus;
-  console.log(newArray[0] + " " + newArray[1] + " " + newArray[2] + " " + newArray[3]);
-  return newArray;
+  newObject.bonusRate = bonus;
+  newObject.totalIncome = Math.round(baseSalary * (1.0 + bonus)); //BUG #3 Need to parenthesize 1.0 + bonus to override order of operations and parseInt to round to whole number
+  newObject.bonusAmount = baseSalary * bonus;
+  console.log(employeeName + " " + newObject.bonusRate + " " + newObject.totalIncome + " " + newObject.bonusAmount);
+  return newObject;
 }
 
 function getBaseSTI(reviewScore){
